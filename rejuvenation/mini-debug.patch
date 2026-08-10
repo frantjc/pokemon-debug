@@ -1,0 +1,52 @@
+diff --git a/Bag.rb b/Bag.rb
+index bcdc220..27f52d0 100644
+--- a/Bag.rb
++++ b/Bag.rb
+@@ -1256,7 +1256,7 @@ class PokemonBagScreen
+         commands[cmdRegister = commands.length] = _INTL("Register")
+       end
+       commands[cmdFavorite = commands.length] = @bag.favoriteItems.include?(item) ? _INTL("Unfavorite") : _INTL("Favorite")
+-      commands[cmdDebug = commands.length] = _INTL("Debug") if $DEBUG || ($game_switches[:MiniDebug_Pass] && !pbIsImportantItem?(item) && !$cache.items[item].checkFlag?(:crystal))
++      commands[cmdDebug = commands.length] = _INTL("Debug") if $DEBUG || (!pbIsImportantItem?(item) && !$cache.items[item].checkFlag?(:crystal))
+       commands[commands.length] = _INTL("Cancel")
+ 
+       # Show commands generated above
+diff --git a/PartyMenu_Registry.rb b/PartyMenu_Registry.rb
+index 3d83fd2..3f0c39c 100644
+--- a/PartyMenu_Registry.rb
++++ b/PartyMenu_Registry.rb
+@@ -207,7 +207,7 @@ MenuHandlers.add(:party_menu, :use_tmx,
+ MenuHandlers.add(:party_menu, :debug,
+   name:      proc { |*args| _INTL("Debug") },
+   order:     90,
+-  condition: proc { |screen, party, pkmnid| $DEBUG || $game_switches[:MiniDebug_Pass] },
++  condition: proc { |screen, party, pkmnid| $DEBUG || true },
+   effect:    proc { |screen, party, pkmnid|
+     # Due to the way debug was written, we need to call pbPokemonDebug on the screen object to force Ruby to execute the global method as if it were running directly inside the PokemonScreen class. This prevents the "@scene is nil" crash.
+     screen.pbPokemonDebug(screen, party[pkmnid], pkmnid)
+diff --git a/PauseMenu_Registry.rb b/PauseMenu_Registry.rb
+index 53fcdf6..187f617 100644
+--- a/PauseMenu_Registry.rb
++++ b/PauseMenu_Registry.rb
+@@ -194,7 +194,7 @@ MenuHandlers.add(:pause_menu, :controls,
+ MenuHandlers.add(:pause_menu, :debug,
+   name:      proc { _INTL("Debug") },
+   order:     90,
+-  condition: proc { |scene, screen| $DEBUG || $game_switches[:MiniDebug_Pass] },
++  condition: proc { |scene, screen| $DEBUG || true },
+   effect:    proc { |scene, screen|
+     pbFadeOutIn(99999) {
+       pbDebugMenu
+diff --git a/Storage.rb b/Storage.rb
+index e409c6c..3fccad3 100644
+--- a/Storage.rb
++++ b/Storage.rb
+@@ -1062,7 +1062,7 @@ class PokemonStorageScreen
+             commands[cmdItem = commands.length] = _INTL("Item") if (heldpoke && !heldpoke.isEgg?) || (!heldpoke && pokemon && !pokemon.isEgg?)
+             commands[cmdMark = commands.length] = _INTL("Mark")
+             commands[cmdRelease = commands.length] = _INTL("Release")
+-            commands[cmdDebug = commands.length] = _INTL("Debug") if $DEBUG || $game_switches[:MiniDebug_Pass]
++            commands[cmdDebug = commands.length] = _INTL("Debug") if $DEBUG || true
+             commands[cmdCancel = commands.length] = _INTL("Cancel")
+ 
+             if heldpoke

@@ -1,5 +1,5 @@
-.PHONY: pokemon-debug-menu debug-menu
-pokemon-debug-menu debug-menu: check-pokemon-rejuvenation
+.PHONY: crests mini-debug
+crests mini-debug: check-pokemon-rejuvenation
 	@cd $(POKEMON_REJUVENATION)/Scripts && (git init && git add . && git commit --message init || true) && git apply $(CURDIR)/$@.patch && git add . && git commit --message $@ && cd -
 
 .PHONY: check-pokemon-rejuvenation
