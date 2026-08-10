@@ -22,15 +22,15 @@ endif
 
 .PHONY: decompile-scripts
 decompile-scripts: check-pokemon-flux clean
-	@$(7Z) -o$(WD) x $(POKEMON_FLUX)/$(FPK)
-	@find $(WD) -name "desktop.ini" -type f -exec rm -f {} +
+	@$(7Z) -o$(WD) x "$(POKEMON_FLUX)/$(FPK)"
+	@find "$(WD)" -name "desktop.ini" -type f -exec rm -f {} +
 
 .PHONY: decompile
 decompile: decompile-scripts
 
 .PHONY: compile-scripts
 compile-scripts: check-pokemon-flux
-	@cd $(WD) && $(7Z) a $(POKEMON_FLUX)/$(FPK) && cd -
+	@cd "$(WD)" && $(7Z) a "$(POKEMON_FLUX)/$(FPK)" && cd -
 
 .PHONY: compile
 compile: compile-scripts
