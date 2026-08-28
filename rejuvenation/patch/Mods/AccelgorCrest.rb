@@ -18,9 +18,8 @@ class PokeBattle_Battler
     if @crested == :ACCELGOR
       @ability = :SKILLLINK
       @spatk *= 1.2
-    else
-      accelcrest_old_crestStats
     end
+    accelcrest_old_crestStats
   end
 end
 
@@ -34,8 +33,7 @@ class PokeBattle_Battle
       pbShowAbilityBox(battler, attrname: getItemName(:ACCELCREST), crest: true)
       pbDisplay(_INTL("{1} acquired {2}!", battler.pbThis, getAbilityName(newability)))
       pbHideAbilityBox(battler)
-    else
-      accelcrest_old_pbCrestEntry(index, pokemon)
     end
+    accelcrest_old_pbCrestEntry(index, pokemon)
   end
 end

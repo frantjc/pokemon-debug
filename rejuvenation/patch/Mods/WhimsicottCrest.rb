@@ -17,9 +17,8 @@ class PokeBattle_Battler
   def crestStats
     if @crested == :WHIMSICOTT
       @spatk *= 1.2
-    else
-      whimsicrest_old_crestStats
     end
+    whimsicrest_old_crestStats
   end
 end
 
