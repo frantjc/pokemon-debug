@@ -91,6 +91,7 @@ class PokeBattle_Battle
     battler = @battlers[index]
     if battler.crested == :WHIMSICOTT
       pbShowAbilityBox(battler, attrname: getItemName(:WHIMSICREST), crest: true)
+      pbDisplay(_INTL("{1} became one with nature!", battler.pbThis))
       pbHideAbilityBox(battler)
     end
     whimsicrest_old_pbCrestEntry(index, pokemon)

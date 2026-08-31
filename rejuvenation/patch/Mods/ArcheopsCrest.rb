@@ -3,7 +3,7 @@ PBStuff::POKEMONTOCREST[:ARCHEOPS] = :ARCHCREST
 ModCacheInjection.hook(:items) {
   $cache.items[:ARCHCREST] = ItemData.new(:ARCHCREST, {
     name: "Archeops Crest",
-    desc: "Grants Defiant. Upon switching in, opponent Intimidates. All phyiscal Flying moves become Brave Bird.",
+    desc: "Grants Defiant. Upon switching in, becomes Intimidated. All phyiscal Flying moves become Brave Bird.",
     price: 0,
     crest: true,
     noUseInBattle: true,
@@ -40,8 +40,8 @@ class PokeBattle_Battle
   def pbCrestEntry(index, pokemon)
     battler = @battlers[index]
     if battler.crested == :ARCHEOPS
-      newability = :DEFIANT
       pbShowAbilityBox(battler, attrname: getItemName(:ARCHCREST), crest: true)
+      pbDisplay(_INTL("{1} became brave!", battler.pbThis))
       pbHideAbilityBox(battler)
     end
     archcrest_old_pbCrestEntry(index, pokemon)
