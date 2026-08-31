@@ -3,7 +3,7 @@ PBStuff::POKEMONTOCREST[:WHIMSICOTT] = :WHIMSICREST
 ModCacheInjection.hook(:items) {
   $cache.items[:WHIMSICREST] = ItemData.new(:WHIMSICREST, {
     name: "Whimsicott Crest",
-    desc: "Grants an enhanced Nature Power move pool. Increases Special Attack by 20%.",
+    desc: "Grants an enhanced Nature Power move pool. Boosts accuracy 1 stage. Increases Special Attack by 20%.",
     price: 0,
     crest: true,
     noUseInBattle: true,
@@ -39,16 +39,15 @@ class PokeBattle_Battle
     :INFERNAL          => :SEARINGSHOT,
     :BACKALLEY         => :FLASHCANNON,
     :FROZENDIMENSION   => :FREEZINGGLARE,
-    :INDOOR            => :HURRICANE,
     :DEUXFINALIS       => :JUDGMENT,
     :HOLY              => :JUDGMENT,
-    :FACTORY           => :LIGHTTHATBURNSTHESKY,
+    :FACTORY           => :DISCHARGE,
     :MIRROR            => :MIRRORSHOT,
     :MISTY             => :MISTYEXPLOSION,
     :BEWITCHED         => :MOONBLAST,
     :HAUNTED           => :MOONGEISTBEAM,
     :SWAMP             => :MUDDYWATER,
-    :WATERSURFACE      => :ORIGINPULSE,
+    :WATERSURFACE      => :HYDROPUMP,
     :BIGTOP            => :PETALDANCE,
     :CAVE              => :POWERGEM,
     :CRYSTALCAVERN     => :POWERGEM,
@@ -57,7 +56,7 @@ class PokeBattle_Battle
     :GLITCH            => :PRISMATICLASER,
     :PSYTERRAIN        => :PSYSTRIKE,
     :CHESS             => :PSYCHIC,
-    :ASHENBEACH        => :SANDSEARSTORM,
+    :ASHENBEACH        => :SCORCHINGSANDS,
     :DESERT            => :SCORCHINGSANDS,
     :COLOSSEUM         => :SECRETSWORD,
     :FLOWERGARDEN      => :SEEDFLARE,
@@ -68,9 +67,9 @@ class PokeBattle_Battle
     :WASTELAND         => :SLUDGEWAVE,
     :DIMENSIONAL       => :SPACIALREND,
     :VOLCANICTOP       => :STEAMERUPTION,
-    :VOLCANIC          => :TERASTARSTORM,
+    :VOLCANIC          => :SEARINGSHOT,
     :MOUNTAIN          => :THUNDER,
-    :CONCERT1          => :TORCHSONG,
+    :CONCERT1          => :FEVERPITCH,
     :INVERSE           => :TRIATTACK,
     :UNDERWATER        => :WATERPULSE,
     :RAINBOW           => :WEATHERBALL,
@@ -81,9 +80,30 @@ class PokeBattle_Battle
 
   def getNaturePowerMove(attacker = nil)
     if attacker&.hasCrest?(:WHIMSICOTT)
-      return WHIMSICOTT_CREST_NATURE_POWER[@field.effect] || :TRIATTACK
+      return WHIMSICOTT_CREST_NATURE_POWER[@field.effect] || :HURRICANE
     end
     whimsicrest_old_getNaturePowerMove
+  end
+
+  alias :whimsicrest_old_pbCrestEntry :pbCrestEntry
+
+  def pbCrestEntry(index, pokemon)
+    battler = @battlers[index]
+    if battler.crested == :WHIMSICOTT
+      pbShowAbilityBox(battler, attrname: getItemName(:WHIMSICREST), crest: true)
+      pbHideAbilityBox(battler)
+    end
+    whimsicrest_old_pbCrestEntry(index, pokemon)
+  end
+
+  alias :whimsicrest_old_pbCrestEffects :pbCrestEffects
+
+  def pbCrestEffects(index, pokemon)
+    battler = @battlers[index]
+    if battler.crested == :WHIMSICOTT
+      battler.pbChangeStats(PBStats::ACCURACY, 1, nil, nil, abilitycheck: :hide)
+    end
+    whimsicrest_old_pbCrestEffects(index, pokemon)
   end
 end
 
@@ -93,5 +113,6 @@ class PokeBattle_Move_0B3
   def pbEffectTarget(attacker, opponent, hitnum = 0, alltargets = nil)
     move = @battle.getNaturePowerMove(attacker)
     attacker.pbUseMoveSimple(move, -1, opponent.index, callermove: self)
+    whimsicrest_old_pbEffectTarget(attacker, opponent, hitnum, alltargets)
   end
 end

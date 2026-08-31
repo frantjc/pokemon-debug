@@ -42,7 +42,6 @@ class PokeBattle_Battle
     if battler.crested == :ARCHEOPS
       newability = :DEFIANT
       pbShowAbilityBox(battler, attrname: getItemName(:ARCHCREST), crest: true)
-      pbDisplay(_INTL("{1} acquired {2}!", battler.pbThis, getAbilityName(newability)))
       pbHideAbilityBox(battler)
     end
     archcrest_old_pbCrestEntry(index, pokemon)
@@ -51,10 +50,10 @@ class PokeBattle_Battle
   alias :archcrest_old_pbCrestEffects :pbCrestEffects
 
   def pbCrestEffects(index, pokemon)
-    archcrest_old_pbCrestEffects(index, pokemon)
     battler = @battlers[index]
     if battler.crested == :ARCHEOPS
       battler.pbChangeStats(PBStats::ATTACK, -1, battler.pbOpposing1, :Intimidate)
     end
+    archcrest_old_pbCrestEffects(index, pokemon)
   end
 end

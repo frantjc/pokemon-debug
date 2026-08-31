@@ -31,7 +31,6 @@ class PokeBattle_Battle
     if battler.crested == :ACCELGOR
       newability = :SKILLLINK
       pbShowAbilityBox(battler, attrname: getItemName(:ACCELCREST), crest: true)
-      pbDisplay(_INTL("{1} acquired {2}!", battler.pbThis, getAbilityName(newability)))
       pbHideAbilityBox(battler)
     end
     accelcrest_old_pbCrestEntry(index, pokemon)

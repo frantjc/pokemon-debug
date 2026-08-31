@@ -5,7 +5,6 @@ class Object
 end
 
 class Module
-  
   def wiremods_wrap_method(sym, &block)
     m = instance_method(sym)
     define_method(sym) do |*args, **kwargs|
@@ -39,6 +38,43 @@ module ModCacheInjection
       end
     end
   end
+
+  def self.createNewForm(mon, formname, idx, form)
+    cacheobj = $cache.pkmn[mon]
+    if form[:baseForm]
+      basedata = cacheobj[form[:baseForm]]
+    else
+      basedata = cacheobj[0]
+    end
+
+    [:species, :form, :name, :dexnum, :Type1, :Type2, :BaseStats, :EVs, :Abilities, 
+      :HiddenAbility, :GrowthRate, :GenderRatio, :BaseEXP, :CatchRate, :Happiness, 
+      :EggSteps, :EggMoves, :Moveset, :compatiblemoves, :moveexceptions, :shadowmoves, 
+      :Color, :EggGroups, :Height, :Weight, :kind, :dexentry, :BattlerPlayerX, 
+      :BattlerPlayerY, :BattlerEnemyX, :BattlerEnemyY, :BattlerShadowSize, :BattlerShadowX, 
+      :preevo, :evolutions, :MegaEvolutions, :RelearnerMoves, :baseForm, :reward, :shape, 
+      :genderDifferences].each do |defKey|
+      next if EXCLUSIVE_ATTRS.include?(defKey)
+      next if EXCLUSIVE_FLAGS.include?(defKey)
+      defValue = basedata.instance_variable_get("@#{defKey}")
+      form[defKey] = defValue unless form.has_key?(defKey)
+    end
+
+    basedata.flags.each do |defKey, defValue|
+      next if EXCLUSIVE_ATTRS.include?(defKey)
+      next if EXCLUSIVE_FLAGS.include?(defKey)
+      form[defKey] = defValue unless form.has_key?(defKey)
+    end
+
+    $cache.pkmn[mon].pokemonData[formname] = MonData.new(mon, formname, form, cacheobj)
+
+    $cache.pkmn[mon].forms[idx] = formname
+  end
+end
+
+Cache_Game.wiremods_wrap_method(:mainFunction) do |m|
+  ModCacheInjection.cacheLoaded(:runtime)
+  m.call
 end
 
 {
@@ -64,6 +100,13 @@ end
   cachePokedexes: :pokedexes,
   cacheCurrencies: :currencies,
   cachePasswords: :passwords,
+  # New cache methods
+  cacheDens: :dens,
+  cacheDenEncounters: :denencounters,
+  cacheWonderPool: :wonderpool,
+  cacheXTPool: :xtpool,
+  cacheBlessings: :blessings,
+  # New cache methods
   loadRuntimeData: [:RXanimations, :RXevents, :runtime],
   cacheTilesets: :RXtilesets,
   cacheAnims: [:move2anim, :animations],
