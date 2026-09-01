@@ -118,10 +118,11 @@ ModCacheInjection.hook(:pkmn) {
       :kind => "Meteorite",
       :dexentry => "It can retract its legs into its body and appear to be an ordinary rock. Stories say they arrived on an asteroid hundreds of years ago.",
       :BattlerPlayerX => 0,
-      :BattlerPlayerY => 0,
+      :BattlerPlayerY => 10,
       :BattlerEnemyX => 0,
-      :BattlerEnemyY => 0,
-      :BattlerShadowSize => 1,
+      :BattlerEnemyY => 16,
+      :BattlerShadowSize => 9,
+      :BattlerShadowX => 0,
     },
   })
 
@@ -190,10 +191,11 @@ ModCacheInjection.hook(:pkmn) {
       :kind => "Bolide",
       :dexentry => "It levitates in the air with powerful psychic energy. The crystals on its body flash many colors when it meets another of its kind.",
       :BattlerPlayerX => 0,
-      :BattlerPlayerY => 0,
+      :BattlerPlayerY => 10,
       :BattlerEnemyX => 0,
-      :BattlerEnemyY => 0,
-      :BattlerShadowSize => 1,
+      :BattlerEnemyY => 16,
+      :BattlerShadowSize => 13,
+      :BattlerShadowX => 0,
     },
   })
 
@@ -263,10 +265,11 @@ ModCacheInjection.hook(:pkmn) {
       :kind => "Traveler",
       :dexentry => "Astronite can exist anywhere, even in the vacuum of space. They are said to roam across the universe colonizing asteroid fields.",
       :BattlerPlayerX => 0,
-      :BattlerPlayerY => 0,
+      :BattlerPlayerY => 10,
       :BattlerEnemyX => 0,
-      :BattlerEnemyY => 0,
-      :BattlerShadowSize => 1,
+      :BattlerEnemyY => 16,
+      :BattlerShadowSize => 19,
+      :BattlerShadowX => 0,
     },
   })
 }

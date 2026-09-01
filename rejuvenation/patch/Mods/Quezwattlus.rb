@@ -67,10 +67,11 @@ ModCacheInjection.hook(:pkmn) {
       :kind => "Shrieking",
       :dexentry => "This ancient pterosaur Pokemon has somehow revived as a ghost. When they flock, their shrill calls can drown out the sound of jet engines.",
       :BattlerPlayerX => 0,
-      :BattlerPlayerY => 0,
+      :BattlerPlayerY => 15,
       :BattlerEnemyX => 0,
-      :BattlerEnemyY => 0,
-      :BattlerShadowSize => 1,
+      :BattlerEnemyY => 24,
+      :BattlerShadowSize => 19,
+      :BattlerShadowX => 0,
     },
   })
 
@@ -131,10 +132,11 @@ ModCacheInjection.hook(:pkmn) {
       :kind => "Shrieking",
       :dexentry => "The deafening screech it emits can cause your ears to ring for days. When it lived, it was an aerial predator, but now it mainly stays on the ground.",
       :BattlerPlayerX => 0,
-      :BattlerPlayerY => 0,
+      :BattlerPlayerY => 15,
       :BattlerEnemyX => 0,
-      :BattlerEnemyY => 0,
-      :BattlerShadowSize => 1,
+      :BattlerEnemyY => 24,
+      :BattlerShadowSize => 39,
+      :BattlerShadowX => 0,
     },
   })
 }
