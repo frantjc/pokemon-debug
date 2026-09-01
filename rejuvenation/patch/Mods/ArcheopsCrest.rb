@@ -50,10 +50,10 @@ class PokeBattle_Battle
   alias :archcrest_old_pbCrestEffects :pbCrestEffects
 
   def pbCrestEffects(index, pokemon)
+    archcrest_old_pbCrestEffects(index, pokemon)
     battler = @battlers[index]
     if battler.crested == :ARCHEOPS
       battler.pbChangeStats(PBStats::ATTACK, -1, battler.pbOpposing1, :Intimidate)
     end
-    archcrest_old_pbCrestEffects(index, pokemon)
   end
 end

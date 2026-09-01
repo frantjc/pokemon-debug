@@ -100,20 +100,17 @@ class PokeBattle_Battle
   alias :whimsicrest_old_pbCrestEffects :pbCrestEffects
 
   def pbCrestEffects(index, pokemon)
+    whimsicrest_old_pbCrestEffects(index, pokemon)
     battler = @battlers[index]
     if battler.crested == :WHIMSICOTT
       battler.pbChangeStats(PBStats::ACCURACY, 1, nil, nil, abilitycheck: :hide)
     end
-    whimsicrest_old_pbCrestEffects(index, pokemon)
   end
 end
 
 class PokeBattle_Move_0B3
-  alias :whimsicrest_old_pbEffectTarget :pbEffectTarget
-
   def pbEffectTarget(attacker, opponent, hitnum = 0, alltargets = nil)
     move = @battle.getNaturePowerMove(attacker)
     attacker.pbUseMoveSimple(move, -1, opponent.index, callermove: self)
-    whimsicrest_old_pbEffectTarget(attacker, opponent, hitnum, alltargets)
   end
 end
