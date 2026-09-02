@@ -54,7 +54,11 @@ ModCacheInjection.hook(:pkmn) {
       :compatiblemoves => [
         :SNARL, :ROAR, :GIGAIMPACT, :TAUNT, :ANCIENTPOWER, :LIGHTSCREEN, :PROTECT, :RAINDANCE, :ENDURE, :SHOCKWAVE, :AERIALACE,
         :FACADE, :REST, :ROOST, :WEATHERBALL, :VOLTSWITCH, :SUBSTITUTE, :AIRSLASH, :ZENHEADBUTT, :SHADOWCLAW, :THUNDERWAVE, :DAZZLINGGLEAM,
-        :SLEEPTALK, :SIGNALBEAM, :DUALWINGBEAT, :SWIFT, :HYPERBEAM, :METALSOUND, :CURSE, :TRASHTALK, :ACROBATICS, :ROUND,
+        :SLEEPTALK, :SIGNALBEAM, :DUALWINGBEAT, :SWIFT, :HYPERBEAM, :METALSOUND, :CURSE, :TRASHTALK, :ACROBATICS, :ROUND, :WAKEUPSHOCK,
+        :THUNDERRAID, :FEVERPITCH, :SPECTRALSCREAM,
+        :CONFUSERAY, :SKYATTACK, :PLUCK, :STEELWING, :SPITE, :BONERUSH, :SCREECH, :CHARGE, :SCARYFACE,
+        :ASTONISH, :EERIEIMPULSE, :SHADOWSNEAK, :FURYATTACK, :NIGHTSHADE, :METALSOUND, :DISCHARGE, :UPROAR, :ANCIENTPOWER, :SHADOWBONE,
+        :MAGNETRISE, :PHANTOMFORCE,
       ],
       :moveexceptions => [],
       :shadowmoves => [
@@ -119,7 +123,8 @@ ModCacheInjection.hook(:pkmn) {
       :compatiblemoves => [
         :SNARL, :ROAR, :GIGAIMPACT, :TAUNT, :ANCIENTPOWER, :LIGHTSCREEN, :PROTECT, :RAINDANCE, :ENDURE, :SHOCKWAVE, :AERIALACE,
         :FACADE, :REST, :ROOST, :WEATHERBALL, :VOLTSWITCH, :SUBSTITUTE, :AIRSLASH, :ZENHEADBUTT, :SHADOWCLAW, :THUNDERWAVE, :DAZZLINGGLEAM,
-        :SLEEPTALK, :SIGNALBEAM, :DUALWINGBEAT, :SWIFT, :HYPERBEAM, :METALSOUND, :CURSE, :TRASHTALK, :ACROBATICS, :ROUND,
+        :SLEEPTALK, :SIGNALBEAM, :DUALWINGBEAT, :SWIFT, :HYPERBEAM, :METALSOUND, :CURSE, :TRASHTALK, :ACROBATICS, :ROUND, :WAKEUPSHOCK,
+        :THUNDERRAID, :FEVERPITCH, :SPECTRALSCREAM,
       ],
       :moveexceptions => [],
       :shadowmoves => [
@@ -139,4 +144,11 @@ ModCacheInjection.hook(:pkmn) {
       :BattlerShadowX => 0,
     },
   })
+
+  [:AMPERINCUS, :QUEZWATTLUS].each do |species|
+    $cache.pkmn[species].pokemonData.each_value do |formData|
+      moves = formData.EggMoves + formData.Moveset.map { |_, move| move }
+      formData.instance_variable_set(:@compatiblemoves, (formData.compatiblemoves + moves).uniq)
+    end
+  end
 }

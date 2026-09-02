@@ -3,7 +3,7 @@ PBStuff::POKEMONTOCREST[:ACCELGOR] = :ACCELCREST
 ModCacheInjection.hook(:items) {
   $cache.items[:ACCELCREST] = ItemData.new(:ACCELCREST, {
     name: "Accelgor Crest",
-    desc: "Grants Skill Link. Increases Special Attack by 20%.",
+    desc: "Grants Skill Link. Boosts special attack and defense.",
     price: 0,
     crest: true,
     noUseInBattle: true,
@@ -18,6 +18,7 @@ class PokeBattle_Battler
     if @crested == :ACCELGOR
       @ability = :SKILLLINK
       @spatk *= 1.2
+      @defense *= 1.1
     end
     accelcrest_old_crestStats
   end

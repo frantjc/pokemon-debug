@@ -27,9 +27,8 @@ ModCacheInjection.hook(:moves) {
   })
 }
 
-################################################################################
-# Multi-hit, confuses the target. (Void Burst)
-################################################################################
+PBStuff::ReplacementAnimations[:VOIDBURST] = :PSYBEAM
+
 class PokeBattle_Move_F00 < PokeBattle_Move_0C0
   def pbCanAffectTarget(attacker, opponent, showMessage = false)
     return true if @basedamage > 0
@@ -272,4 +271,11 @@ ModCacheInjection.hook(:pkmn) {
       :BattlerShadowX => 0,
     },
   })
+
+  [:COMITE, :COMETEOR, :ASTRONITE].each do |species|
+    $cache.pkmn[species].pokemonData.each_value do |formData|
+      moves = formData.EggMoves + formData.Moveset.map { |_, move| move }
+      formData.instance_variable_set(:@compatiblemoves, (formData.compatiblemoves + moves).uniq)
+    end
+  end
 }

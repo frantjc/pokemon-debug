@@ -3,7 +3,7 @@ PBStuff::POKEMONTOCREST[:WHIMSICOTT] = :WHIMSICREST
 ModCacheInjection.hook(:items) {
   $cache.items[:WHIMSICREST] = ItemData.new(:WHIMSICREST, {
     name: "Whimsicott Crest",
-    desc: "Grants an enhanced Nature Power move pool. Boosts accuracy 1 stage. Increases Special Attack by 20%.",
+    desc: "Grants an enhanced Nature Power move pool. Boosts accuracy, defense, and special attack.",
     price: 0,
     crest: true,
     noUseInBattle: true,
@@ -17,6 +17,7 @@ class PokeBattle_Battler
   def crestStats
     if @crested == :WHIMSICOTT
       @spatk *= 1.2
+      @defense *= 1.1
     end
     whimsicrest_old_crestStats
   end
@@ -60,16 +61,27 @@ class PokeBattle_Battle
     :DESERT            => :SCORCHINGSANDS,
     :COLOSSEUM         => :SECRETSWORD,
     :FLOWERGARDEN      => :SEEDFLARE,
+    :FLOWERGARDEN1     => :SEEDFLARE,
+    :FLOWERGARDEN2     => :SEEDFLARE,
+    :FLOWERGARDEN3     => :SEEDFLARE,
+    :FLOWERGARDEN4     => :SEEDFLARE,
+    :FLOWERGARDEN5     => :SEEDFLARE,
     :FOREST            => :SEEDFLARE,
     :GRASSY            => :SEEDFLARE,
     :CORRUPTED         => :SLUDGEWAVE,
     :MURKWATERSURFACE  => :SLUDGEWAVE,
     :WASTELAND         => :SLUDGEWAVE,
     :DIMENSIONAL       => :SPACIALREND,
+    :VOLCANICTOP       => :SUPERHEATED,
     :VOLCANICTOP       => :STEAMERUPTION,
+    :BURNING           => :SEARINGSHOT,
     :VOLCANIC          => :SEARINGSHOT,
     :MOUNTAIN          => :THUNDER,
-    :CONCERT1          => :FEVERPITCH,
+    :CROWD             => :FOCUSBLAST,
+    :CONCERT1          => :TORCHSONG,
+    :CONCERT2          => :FEVERPITCH,
+    :CONCERT3          => :FEVERPITCH,
+    :CONCERT4          => :FEVERPITCH,
     :INVERSE           => :TRIATTACK,
     :UNDERWATER        => :WATERPULSE,
     :RAINBOW           => :WEATHERBALL,
@@ -103,7 +115,7 @@ class PokeBattle_Battle
     whimsicrest_old_pbCrestEffects(index, pokemon)
     battler = @battlers[index]
     if battler.crested == :WHIMSICOTT
-      battler.pbChangeStats(PBStats::ACCURACY, 1, nil, nil, abilitycheck: :hide)
+      battler.pbIncreaseStatBasic(PBStats::ACCURACY, 1)
     end
   end
 end

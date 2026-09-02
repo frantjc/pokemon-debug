@@ -40,6 +40,8 @@ class PokeBattle_Move_F01 < PokeBattle_Move
   end
 end
 
+PBStuff::ReplacementAnimations[:ADAMANTWING] = :WINGATTACK
+
 ModCacheInjection.hook(:abil) {
   $cache.abil[:CRYSTALLIZE] = AbilityData.new(:CRYSTALLIZE, {
     name: "Crystallize",
@@ -254,7 +256,7 @@ ModCacheInjection.hook(:pkmn) {
         :SANDSTORM, :ROCKTOMB, :AERIALACE, :KNOCKOFF, :FACADE, :REST, :ROOST, :WEATHERBALL, :CALMMIND,
         :SUBSTITUTE, :AIRSLASH, :FALSESWIPE, :ZENHEADBUTT, :SHADOWCLAW, :SUCKERPUNCH, :BULLDOZE,
         :DAZZLINGGLEAM, :ROCKSLIDE, :SLEEPTALK, :STOMPINGTANTRUM, :BREAKINGSWIPE, :DUALWINGBEAT, :SWIFT,
-        :HYPERBEAM, :IRONDEFENSE, :ROUND,
+        :HYPERBEAM, :IRONDEFENSE, :ROUND, :SLASHANDBURN, :DRAGONASCENT, :SKYDROP, :WINGATTACK, :PECK,
       ],
       :moveexceptions => [],
       :shadowmoves => [
@@ -274,4 +276,11 @@ ModCacheInjection.hook(:pkmn) {
       :BattlerShadowX => 0,
     },
   })
+
+  [:GRIZZLET, :GEOGRIFF, :DIASTRYX].each do |species|
+    $cache.pkmn[species].pokemonData.each_value do |formData|
+      moves = formData.EggMoves + formData.Moveset.map { |_, move| move }
+      formData.instance_variable_set(:@compatiblemoves, (formData.compatiblemoves + moves).uniq)
+    end
+  end
 }
