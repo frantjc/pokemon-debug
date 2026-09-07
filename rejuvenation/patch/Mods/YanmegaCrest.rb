@@ -42,7 +42,7 @@ class PokeBattle_Battler
       @ability = :TINTEDLENS
 
       @moves.each_with_index do |move, i|
-        next unless move.id == :ANCIENTPOWER
+        next unless move.move == :ANCIENTPOWER
 
         old_pp = move.pp
         old_totalpp = move.totalpp
