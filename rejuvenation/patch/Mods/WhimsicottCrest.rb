@@ -12,7 +12,7 @@ ModCacheInjection.hook(:items) {
 }
 
 class PokeBattle_Battler
-  alias :whimsicrest_old_crestStats :crestStats
+  alias :whimsicrest_old_crestStats :crestStats unless method_defined?(:whimsicrest_old_crestStats)
 
   def crestStats
     if @crested == :WHIMSICOTT
@@ -88,7 +88,7 @@ class PokeBattle_Battle
     :ELECTERRAIN       => :WILDBOLTSTORM,
   }
 
-  alias :whimsicrest_old_getNaturePowerMove :getNaturePowerMove
+  alias :whimsicrest_old_getNaturePowerMove :getNaturePowerMove unless method_defined?(:whimsicrest_old_getNaturePowerMove)
 
   def getNaturePowerMove(attacker = nil)
     if attacker&.hasCrest?(:WHIMSICOTT)
@@ -97,7 +97,7 @@ class PokeBattle_Battle
     whimsicrest_old_getNaturePowerMove
   end
 
-  alias :whimsicrest_old_pbCrestEntry :pbCrestEntry
+  alias :whimsicrest_old_pbCrestEntry :pbCrestEntry unless method_defined?(:whimsicrest_old_pbCrestEntry)
 
   def pbCrestEntry(index, pokemon)
     battler = @battlers[index]
@@ -109,7 +109,7 @@ class PokeBattle_Battle
     whimsicrest_old_pbCrestEntry(index, pokemon)
   end
 
-  alias :whimsicrest_old_pbCrestEffects :pbCrestEffects
+  alias :whimsicrest_old_pbCrestEffects :pbCrestEffects unless method_defined?(:whimsicrest_old_pbCrestEffects)
 
   def pbCrestEffects(index, pokemon)
     whimsicrest_old_pbCrestEffects(index, pokemon)

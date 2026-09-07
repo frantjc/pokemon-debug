@@ -1,7 +1,7 @@
 class PokeBattle_Battle
   attr_accessor :speedup_spedup
 
-  alias :speedup_old_initialize :initialize
+  alias :speedup_old_initialize :initialize unless method_defined?(:speedup_old_initialize)
 
   def initialize(*args,**kwargs)
     if !$speed_up
@@ -11,7 +11,7 @@ class PokeBattle_Battle
     return speedup_old_initialize(*args, **kwargs)
   end
 
-  alias :speedup_old_pbEndOfBattle :pbEndOfBattle
+  alias :speedup_old_pbEndOfBattle :pbEndOfBattle unless method_defined?(:speedup_old_pbEndOfBattle)
 
   def pbEndOfBattle(*args, **kwargs)
     if @speedup_spedup

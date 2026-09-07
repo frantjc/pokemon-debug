@@ -12,7 +12,7 @@ ModCacheInjection.hook(:items) {
 }
 
 class PokeBattle_Battler
-  alias :accelcrest_old_crestStats :crestStats
+  alias :accelcrest_old_crestStats :crestStats unless method_defined?(:accelcrest_old_crestStats)
 
   def crestStats
     if @crested == :ACCELGOR
@@ -25,7 +25,7 @@ class PokeBattle_Battler
 end
 
 class PokeBattle_Battle
-  alias :accelcrest_old_pbCrestEntry :pbCrestEntry
+  alias :accelcrest_old_pbCrestEntry :pbCrestEntry unless method_defined?(:accelcrest_old_pbCrestEntry)
 
   def pbCrestEntry(index, pokemon)
     battler = @battlers[index]

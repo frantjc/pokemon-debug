@@ -1,5 +1,5 @@
 class Pokedex
-  alias :quezwattlus_refreshDex :refreshDex
+  alias :quezwattlus_refreshDex :refreshDex unless method_defined?(:quezwattlus_refreshDex)
 
   def refreshDex(forceRefresh = false)
     astronite_refreshDex(forceRefresh)

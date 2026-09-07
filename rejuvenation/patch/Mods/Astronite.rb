@@ -1,5 +1,5 @@
 class Pokedex
-  alias :astronite_refreshDex :refreshDex
+  alias :astronite_refreshDex :refreshDex unless method_defined?(:astronite_refreshDex)
 
   def refreshDex(forceRefresh = false)
     astronite_refreshDex(forceRefresh)

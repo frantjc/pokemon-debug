@@ -1,5 +1,5 @@
 class Pokedex
-  alias :diastryx_refreshDex :refreshDex
+  alias :diastryx_refreshDex :refreshDex unless method_defined?(:diastryx_refreshDex)
 
   def refreshDex(forceRefresh = false)
     diastryx_refreshDex(forceRefresh)
@@ -51,7 +51,7 @@ ModCacheInjection.hook(:abil) {
   })
 }
 
-alias :crystallize_pbAbilityMoveTypeChange :pbAbilityMoveTypeChange
+alias :crystallize_pbAbilityMoveTypeChange :pbAbilityMoveTypeChange unless method_defined?(:crystallize_pbAbilityMoveTypeChange)
 
 def pbAbilityMoveTypeChange(move, ability, type, field = nil)
   return :ROCK if ability == :CRYSTALLIZE && type == :NORMAL && !PBStuff::ZMOVES.include?(move)
@@ -59,7 +59,7 @@ def pbAbilityMoveTypeChange(move, ability, type, field = nil)
 end
 
 class PokeBattle_Move
-  alias :crystallize_pbCalcDamage :pbCalcDamage
+  alias :crystallize_pbCalcDamage :pbCalcDamage unless method_defined?(:crystallize_pbCalcDamage)
 
   def pbCalcDamage(attacker, opponent, hitnum = 0, feedbackMessages = {opponent.index => []}, movetype: nil)
     damage = crystallize_pbCalcDamage(attacker, opponent, hitnum, feedbackMessages, movetype: movetype)
