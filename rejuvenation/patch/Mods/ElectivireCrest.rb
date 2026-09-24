@@ -29,10 +29,6 @@ class PokeBattle_Battle
     electcrest_old_pbCrestEntry(index, pokemon)
     battler = @battlers[index]
     if battler.crested == :ELECTIVIRE
-      newability = :HADRONENGINE
-      pbShowAbilityBox(battler, attrname: getItemName(:ELECTCREST), crest: true)
-      pbDisplay(_INTL("{1} acquired {2}!", battler.pbThis, getAbilityName(newability)))
-      pbHideAbilityBox(battler)
       battler.pbAbilitiesOnSwitchIn(true)
     end
   end
