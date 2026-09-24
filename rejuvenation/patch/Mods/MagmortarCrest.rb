@@ -33,6 +33,7 @@ class PokeBattle_Battle
       pbShowAbilityBox(battler, attrname: getItemName(:MAGMCREST), crest: true)
       pbDisplay(_INTL("{1} acquired {2}!", battler.pbThis, getAbilityName(newability)))
       pbHideAbilityBox(battler)
+      battler.pbAbilitiesOnSwitchIn(true)
     end
   end
 end
