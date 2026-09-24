@@ -15,10 +15,10 @@ class PokeBattle_Battler
   alias :electcrest_old_crestStats :crestStats unless method_defined?(:electcrest_old_crestStats)
 
   def crestStats
+    electcrest_old_crestStats
     if @crested == :ELECTIVIRE
       @ability = :HADRONENGINE
     end
-    electcrest_old_crestStats
   end
 end
 

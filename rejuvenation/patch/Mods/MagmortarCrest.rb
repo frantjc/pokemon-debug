@@ -15,10 +15,10 @@ class PokeBattle_Battler
   alias :magmcrest_old_crestStats :crestStats unless method_defined?(:magmcrest_old_crestStats)
 
   def crestStats
+    magmcrest_old_crestStats
     if @crested == :MAGMORTAR
       @ability = :ORICHALCUMPULSE
     end
-    magmcrest_old_crestStats
   end
 end
 
