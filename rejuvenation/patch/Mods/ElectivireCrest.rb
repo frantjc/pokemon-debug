@@ -26,6 +26,7 @@ class PokeBattle_Battle
   alias :electcrest_old_pbCrestEntry :pbCrestEntry unless method_defined?(:electcrest_old_pbCrestEntry)
 
   def pbCrestEntry(index, pokemon)
+    electcrest_old_pbCrestEntry(index, pokemon)
     battler = @battlers[index]
     if battler.crested == :ELECTIVIRE
       newability = :HADRONENGINE
@@ -33,6 +34,5 @@ class PokeBattle_Battle
       pbDisplay(_INTL("{1} acquired {2}!", battler.pbThis, getAbilityName(newability)))
       pbHideAbilityBox(battler)
     end
-    electcrest_old_pbCrestEntry(index, pokemon)
   end
 end

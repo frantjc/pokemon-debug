@@ -26,6 +26,7 @@ class PokeBattle_Battle
   alias :magmcrest_old_pbCrestEntry :pbCrestEntry unless method_defined?(:magmcrest_old_pbCrestEntry)
 
   def pbCrestEntry(index, pokemon)
+    magmcrest_old_pbCrestEntry(index, pokemon)
     battler = @battlers[index]
     if battler.crested == :MAGMORTAR
       newability = :ORICHALCUMPULSE
@@ -33,6 +34,5 @@ class PokeBattle_Battle
       pbDisplay(_INTL("{1} acquired {2}!", battler.pbThis, getAbilityName(newability)))
       pbHideAbilityBox(battler)
     end
-    magmcrest_old_pbCrestEntry(index, pokemon)
   end
 end
