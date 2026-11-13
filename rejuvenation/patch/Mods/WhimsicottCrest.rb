@@ -60,14 +60,6 @@ class PokeBattle_Battle
     :ASHENBEACH        => :SCORCHINGSANDS,
     :DESERT            => :SCORCHINGSANDS,
     :COLOSSEUM         => :SECRETSWORD,
-    :FLOWERGARDEN      => :SEEDFLARE,
-    :FLOWERGARDEN1     => :SEEDFLARE,
-    :FLOWERGARDEN2     => :SEEDFLARE,
-    :FLOWERGARDEN3     => :SEEDFLARE,
-    :FLOWERGARDEN4     => :SEEDFLARE,
-    :FLOWERGARDEN5     => :SEEDFLARE,
-    :FOREST            => :SEEDFLARE,
-    :GRASSY            => :SEEDFLARE,
     :CORRUPTED         => :SLUDGEWAVE,
     :MURKWATERSURFACE  => :SLUDGEWAVE,
     :WASTELAND         => :SLUDGEWAVE,
@@ -92,7 +84,7 @@ class PokeBattle_Battle
 
   def getNaturePowerMove(attacker = nil)
     if attacker&.hasCrest?(:WHIMSICOTT)
-      return WHIMSICOTT_CREST_NATURE_POWER[@field.effect] || :HURRICANE
+      return WHIMSICOTT_CREST_NATURE_POWER[@field.effect] || :SEEDFLARE
     end
     whimsicrest_old_getNaturePowerMove
   end

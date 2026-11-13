@@ -40,7 +40,7 @@ class PokeBattle_Move_F01 < PokeBattle_Move
   end
 end
 
-PBStuff::ReplacementAnimations[:ADAMANTWING] = :WINGATTACK
+mod_replace_animation(:ADAMANTWING, :WINGATTACK)
 
 ModCacheInjection.hook(:abil) {
   $cache.abil[:CRYSTALLIZE] = AbilityData.new(:CRYSTALLIZE, {

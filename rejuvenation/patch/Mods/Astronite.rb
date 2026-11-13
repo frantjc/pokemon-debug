@@ -27,7 +27,7 @@ ModCacheInjection.hook(:moves) {
   })
 }
 
-PBStuff::ReplacementAnimations[:VOIDBURST] = :PSYBEAM
+mod_replace_animation(:VOIDBURST, :PSYBEAM)
 
 class PokeBattle_Move_F00 < PokeBattle_Move_0C0
   def pbCanAffectTarget(attacker, opponent, showMessage = false)
